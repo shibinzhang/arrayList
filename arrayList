@@ -1,89 +1,53 @@
-// create a fundtion constroctor
+//creat a arrayList constructor
 
+function arrayList () {
+	this.array = [];
+}
 
+arrayList.prototype = {
 
-function LinkedList() {
-	this._length = 0;
-	this._head = null
+	// add one item to the end of the array,
+	add: function (val) {
+		
+		this.array.push (val)
+	},
+	sort: function () {
+		return this.array.sort(function (a,b){return a - b;});
+	},
+	// give the length of the array
+	length: function () {
+		return this.array.length;
+	},
+	//change the array to string
+	toString: function () {
+		return this.array.toString();
+	},
+	//add connect element and change the array to string
+	join: function () {
+		return this.array.join ();
+	},
+
+	// remove and element from the array
+	remove: function(val) {
+		for (i=0; i<this.array.length; i++) { 
+			if (this.array[i]==val) { 
+				this.array.splice (i,1);
+				i--;
+			}
+		}
+
+	}
+    	
 }
 
 
-LinkedList.prototype = {
-	add: function (data) {
-		//creat a new node, place data in
-		var node = {
-
-			data:data,
-			next:null
-		}
-		//use to traverse the structure current
-		//special case : no items in the list yet
-		if (this._head===null) {
-			this._head = node;
-		} else {
-			current = this._head;
-			while (current.next) {
-				current = current.next;
-			}
-			 current.next = node;
-		}
-
-
-		// don't forget to update the count
-		this._length++;
-	},
-
-
-	 item : function (index) {
-	 	//check for out of bounds values
-	 	if(index > -1 && index <this._length){
-			var current = this._head, i=0;
-			while(i++ < index){
-				current = current.next;
-			}
-			return current.data;
-		}else {
-			return null;
-		}
-	},
-
-	
-    remove : function (index) {
-    	// check for out of bound values
-    	if (index > -1 && index < this._length) {
-    		var current = this._head,
-    		previous,
-    		i = 0;
-    		// special case: removeing first item
-    	    if (index === 0) {
-    	    	this._head = current.next; 
-
-    	    } else {
-    	    	// find th right location
-                while (i++ < index) {
-                	previous = current;
-                	current = current.next;
-                }
-                // skip over the item to remove
-                previous.next = current.next;
-    	    }
-    	    // decrement the length
-    	    this._length--;
-    	    // return the value
-    	    return current.data;
-    	} else {
-    		return null;
-    	} 
-    }
-
-}
-
-var list = new LinkedList ();
-list.add ("Ford");
-list.add ("BMW");
-list.add ("Volvo");
-list.add ("Jeep");
-alert(list.item(2));
-list.remove(2);
-alert(list.item(2));
-list.item();
+var array1 = new arrayList ();
+var array2 = [2,4,8,9,4,2,3];
+array1.add("Jeep");
+array1.add(5);
+array1.add(1);
+array1.add(7);
+array1.add("Apple");
+console.log (array1);
+array1.remove(7);
+console.log (array1);
